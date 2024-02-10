@@ -11,13 +11,14 @@ HEIGHT_CM = 173
 AGE = 32
 
 EXERCISE_ENDPOINT = "https://trackapi.nutritionix.com/v2/natural/exercise"
-EXERCISE_TEXT = "ran about 30 minutes"
 
 GET_SHEETY = "https://api.sheety.co/2562639edf04f0d34bec0ec17a4b4386/myWorkouts/workouts"
 POST_SHEETY = "https://api.sheety.co/2562639edf04f0d34bec0ec17a4b4386/myWorkouts/workouts"
 
 API_ID = "c6fbdd13"
 API_KEY = "079c4d7c91593616e955d6f6adf7cdfa"
+
+exercise_text = input("Tell me which exercises you did: ")
 
 headers = {
     "x-app-id": API_ID,
@@ -26,7 +27,7 @@ headers = {
 }
 
 parameters = {
-    "query": EXERCISE_TEXT,
+    "query": exercise_text,
     "gender": GENDER,
     "weight_kg": WEIGHT_KG,
     "height_cm": HEIGHT_CM,
@@ -37,6 +38,7 @@ parameters = {
 response = requests.post(EXERCISE_ENDPOINT, json=parameters, headers=headers)
 result = response.json()
 
+print(f"Nutritionix API call: \n {result} \n")
 
 
 for exercise in result["exercises"]:
